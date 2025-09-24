@@ -227,7 +227,7 @@ void handlePedestrianSafety(int lane, int prevLane) {
 
   digitalWrite(pedestrianLights[lane], HIGH);
   
-  activatePedestrianSignal();
+  // activatePedestrianSignal();
   
   pedestrianStartTime = millis();
 }
@@ -267,7 +267,7 @@ void handleEmergencyVehicle(int lane, int prevLane) {
   delay(2000);
   Serial.println("🟢 " + laneNames[lane] + " lane activated for EMERGENCY");
   
-  activateEmergencyAlert();
+  // activateEmergencyAlert();
   
   Serial.println("🤖 Python controls emergency duration");
 }
@@ -328,4 +328,3 @@ void setAllLanesOff() {
 
 
 
-}
