@@ -145,12 +145,12 @@ class TrafficPriorityManager:
             if lane_data.get('emergency', 0) > 0:
                 emergency_detected = True
                 emergency_lane = i
-                print(f"  🚨 EMERGENCY VEHICLE DETECTED! 🚨")
+                print(f"   EMERGENCY VEHICLE DETECTED! ")
 
             if lane_data.get('pedestrian', 0) > 0:
                 pedestrians_detected = True
                 pedestrian_lane = i
-                print(f"  🚶 Pedestrian detected")
+                print(f" Pedestrian detected")
 
             print()
 
@@ -199,7 +199,7 @@ class TrafficPriorityManager:
             print(f"   Previous Lane: {self.previous_priority_lane}")
 
         except Exception as e:
-            print(f"❌ Serial communication error: {e}")
+            print(f" Serial communication error: {e}")
 
 
 
@@ -327,13 +327,13 @@ class OptimizedCameraDetector:
                     cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 255), 1)
 
         if counts.get('emergency', 0) > 0:
-            cv2.putText(frame, "🚨 EMERGENCY DETECTED", (10, y_pos + 45),
+            cv2.putText(frame, " EMERGENCY DETECTED", (10, y_pos + 45),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 2)
         elif counts.get('pedestrian', 0) > 0:
-            cv2.putText(frame, "🚶 PEDESTRIAN DETECTED", (10, y_pos + 45),
+            cv2.putText(frame, "PEDESTRIAN DETECTED", (10, y_pos + 45),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2)
         elif self.lane_id == self.priority_manager.current_priority_lane:
-            cv2.putText(frame, "🟢 PRIORITY LANE", (10, y_pos + 45),
+            cv2.putText(frame, " PRIORITY LANE", (10, y_pos + 45),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0, 255, 0), 2)
 
     def display_frame_safe(self):
@@ -403,10 +403,10 @@ class TrafficManagementSystem:
         try:
             self.serial_conn = serial.Serial(SERIAL_PORT, SERIAL_BAUDRATE, timeout=1)
             time.sleep(2)
-            print(f"✅ Serial connection established on {SERIAL_PORT}")
+            print(f"Serial connection established on {SERIAL_PORT}")
         except Exception as e:
-            print(f"❌ Failed to establish serial connection: {e}")
-            print("⚠️ Traffic lights will not be controlled")
+            print(f" Failed to establish serial connection: {e}")
+            print(" Traffic lights will not be controlled")
 
     def setup_priority_manager(self):
 
@@ -429,8 +429,8 @@ class TrafficManagementSystem:
             detector.start()
             time.sleep(0.5)
 
-        print(f"\n✅ All {len(self.detectors)} cameras started successfully!")
-        print("🖥️ Camera windows will appear as cameras connect...")
+        print(f"\n All {len(self.detectors)} cameras started successfully!")
+        print(" Camera windows will appear as cameras connect...")
 
     def display_loop(self):
 
@@ -457,7 +457,7 @@ class TrafficManagementSystem:
                     detector.save_frame()
 
             if quit_requested:
-                print("\n🛑 Shutdown requested...")
+                print("\n Shutdown requested...")
                 break
 
             time.sleep(0.016)
@@ -479,7 +479,7 @@ class TrafficManagementSystem:
             self.serial_conn.close()
 
         cv2.destroyAllWindows()
-        print("✅ System stopped successfully.")
+        print("System stopped successfully.")
 
     def run(self):
 
@@ -487,7 +487,7 @@ class TrafficManagementSystem:
             self.start_all()
             self.display_loop()
         except KeyboardInterrupt:
-            print("\n⚠️ Keyboard interrupt received...")
+            print("\n Keyboard interrupt received...")
         finally:
             self.stop_all()
 
@@ -496,11 +496,11 @@ class TrafficManagementSystem:
 if __name__ == "__main__":
 
     if torch.cuda.is_available():
-        print(f"🎮 CUDA Device: {torch.cuda.get_device_name()}")
-        print(f"💾 CUDA Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB")
+        print(f" CUDA Device: {torch.cuda.get_device_name()}")
+        print(f" CUDA Memory: {torch.cuda.get_device_properties(0).total_memory / 1e9:.1f} GB")
 
-    print("\n🚦 AI Traffic Management System - OPTIMIZED")
-    print("🎯 Features: Priority detection, Emergency response, Pedestrian safety")
+    print("\n AI Traffic Management System - OPTIMIZED")
+    print(" Features: Priority detection, Emergency response, Pedestrian safety")
 
     system = TrafficManagementSystem()
     system.run()
