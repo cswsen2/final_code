@@ -77,9 +77,7 @@ class ModelManager:
 model_manager = ModelManager()
 
 
-# ==============================
-# Traffic Priority Manager (UNCHANGED - as requested)
-# ==============================
+
 class TrafficPriorityManager:
     def __init__(self, serial_connection):
         self.serial_conn = serial_connection
